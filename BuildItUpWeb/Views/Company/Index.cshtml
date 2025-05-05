@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BuildItUp.Models.Entities.Company>
+
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<h1 class="section-heading">Companies</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-circle"></i> Add Company
+</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Name)</th>
+            <th>Engines</th>
+            <th>Cars</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model)
+        {
+                <tr>
+                    <td>@company.Name</td>
+
+                    <td>
+                    @if (company.Engines.Any())
+                    {
+                                <ul>
+                            @foreach (var engine in company.Engines)
+                            {
+                                            <li>
+                                                            <strong>@engine.EngineModel</strong> (@engine.Horsepower hp)
+                                            </li>
+                            }
+                                </ul>
+                    }
+                    else
+                    {
+                                <span class="text-muted">No engines</span>
+                    }
+                    </td>
+
+                    <td>
+                    @if (company.Engines.SelectMany(e => e.Cars).Any())
+                    {
+                                <ul>
+                            @foreach (var car in company.Engines.SelectMany(e => e.Cars))
+                            {
+                                                        <li>@car.Model (Engine: @car.Engine.EngineModel)</li>
+                            }
+                                </ul>
+                    }
+                    else
+                    {
+                                <span class="text-muted">No cars</span>
+                    }
+                    </td>
+
+                    <td>
+                        <a asp-action="Details" asp-route-id="@company.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Edit" asp-route-id="@company.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@company.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

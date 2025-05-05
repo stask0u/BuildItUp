@@ -1,0 +1,23 @@
+﻿@model BuildItUp.Models.Entities.Engine
+
+<div class="form-section">
+    <h2>Engine Details</h2>
+
+    <div class="form-group mb-3">
+        <label>Engine Model</label>
+        <div>@Model.EngineModel</div>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Horsepower</label>
+        <div>@Model.Horsepower</div>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Company</label>
+        <div>@Model.Company.Name</div>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+</div>

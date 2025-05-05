@@ -1,0 +1,29 @@
+﻿@model BuildItUp.Models.Entities.Engine
+
+<div class="form-section">
+    <h2>Add Engine</h2>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group mb-3">
+            <label asp-for="EngineModel"></label>
+            <input asp-for="EngineModel" class="form-control" />
+            <span asp-validation-for="EngineModel" class="text-danger"></span>
+        </div>
+          <div class="form-group mb-3">
+            <label asp-for="Horsepower"></label>
+            <input asp-for="Horsepower" class="form-control" />
+            <span asp-validation-for="Horsepower" class="text-danger"></span>
+        </div>
+         <div class="form-group mb-3">
+            <label asp-for="CompanyId"></label>
+            <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.Companies">
+                <option value="">-- Select Company --</option>
+            </select>
+            <span asp-validation-for="CompanyId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

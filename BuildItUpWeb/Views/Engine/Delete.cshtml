@@ -1,0 +1,27 @@
+﻿@model BuildItUp.Models.Entities.Engine
+
+<div class="form-section">
+    <h2>Delete Engine</h2>
+
+    <div class="alert alert-warning">
+        Are you sure you want to delete the engine "<strong>@Model.EngineModel</strong>"?
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Horsepower</label>
+        <div>@Model.Horsepower</div>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Company</label>
+        <div>@Model.Company.Name</div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

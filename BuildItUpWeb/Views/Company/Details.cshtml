@@ -1,0 +1,50 @@
+﻿@model BuildItUp.Models.Entities.Company
+
+@{
+    ViewData["Title"] = "Company Details";
+}
+
+<h2>Company Details</h2>
+
+<div class="mb-3">
+    <label><strong>Name:</strong></label>
+    <p>@Model.Name</p>
+</div>
+
+<div class="mb-4">
+    <h4>Engines</h4>
+    @if (Model.Engines.Any())
+    {
+            <ul>
+            @foreach (var engine in Model.Engines)
+            {
+                        <li>
+                                    <strong>@engine.EngineModel</strong> (@engine.Horsepower hp)
+                    @if (engine.Cars.Any())
+                    {
+                                    <br />
+
+                        <em>Cars:</em>
+                                    <ul>
+                            @foreach (var car in engine.Cars)
+                            {
+                                                <li>@car.Model</li>
+                            }
+                                    </ul>
+                    }
+                    else
+                    {
+                                    <div class="text-muted">No cars for this engine</div>
+                    }
+                        </li>
+            }
+            </ul>
+    }
+    else
+    {
+            <p class="text-muted">No engines available.</p>
+    }
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>

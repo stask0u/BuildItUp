@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BuildItUp.Models.Entities.Engine>
+
+@{
+    ViewData["Title"] = "Engines";
+}
+
+<h1 class="section-heading">Engines</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-circle"></i> Add Engine
+</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().EngineModel)</th>
+            <th>Company</th>
+            <th>Cars</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var engine in Model)
+        {
+            <tr>
+                <td>@engine.EngineModel</td>
+                <td><strong>@engine.Company.Name</strong></td>
+
+
+                <td>
+                    @foreach (var car in engine.Cars)
+                    {
+                        <div>@car.Model</div>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@engine.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@engine.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@engine.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+                    </tr>
+        }
+    </tbody>
+</table>
