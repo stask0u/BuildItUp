@@ -13,7 +13,7 @@ namespace BuildItUpConsole
         {
             var services = new ServiceCollection();
 
-            // Register DbContext and services
+           
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer("Server =localhost\\SQLEXPRESS; Database = BuildItUpDB; Trusted_Connection = True; TrustServerCertificate = True; "));
 
@@ -21,20 +21,20 @@ namespace BuildItUpConsole
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IEngineService, EngineService>();
 
-            // Build the ServiceProvider
+            
             var serviceProvider = services.BuildServiceProvider();
 
-            // Instantiate the service objects
+            
             var carService = serviceProvider.GetRequiredService<ICarService>();
             var companyService = serviceProvider.GetRequiredService<ICompanyService>();
             var engineService = serviceProvider.GetRequiredService<IEngineService>();
 
-            // Instantiate the menu classes
+            
             var carMenu = new CarMenu(carService);
             var companyMenu = new CompanyMenu(companyService);
             var engineMenu = new EngineMenu(engineService,companyService);
 
-            // Main menu loop
+           
             while (true)
             {
                 Console.Clear();
